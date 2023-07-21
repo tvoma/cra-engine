@@ -1,3 +1,5 @@
+'use client'
+
 import { Document, Page, Text, View } from "@react-pdf/renderer"
 import { mapWorkDays } from "./mapper"
 import style from './style'
