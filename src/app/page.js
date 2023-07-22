@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { PDFDownloadLink } from "@react-pdf/renderer"
 import DocumentPdf from "@/components/document-pdf"
 import Field from "@/components/field"
@@ -8,6 +8,7 @@ import { getActivities, getCurrentMonth } from "./getter"
 import { mapDays } from "./mapper"
 
 function Home() {
+    const [isReady, setIsReady] = useState(false)
     const [info, setInfo] = useState({
         client: '',
         fullname: '',
@@ -21,6 +22,10 @@ function Home() {
         setInfo(current => ({ ...current, [name]: value }))
     }
 
+    useEffect(() => {
+        if (!isReady) setIsReady(true)
+    }, [isReady])
+
     return (
         <div className='m-12'>
             <h1 className="text-3xl mb-6">Compte rendu d&apos;activité du mois de <span className="font-extrabold">{ info.currentMonth.toLowerCase() }</span></h1>
@@ -31,12 +36,14 @@ function Home() {
                     <Field type='number' name='nbrDays' label='Nombre de jours travaillés' defaultValue={ info.nbrDays } />
                 </div>
                 <div className="flex justify-between mb-6">{ mapDays(info.activities, setInfo) }</div>
-                <PDFDownloadLink
-                    className="btn-rounded btn btn-secondary"
-                    document={ <DocumentPdf info={ info } /> } 
-                    fileName="cra.pdf">
-                    Generate
-                </PDFDownloadLink>
+                { isReady && 
+                    <PDFDownloadLink
+                        className="btn-rounded btn btn-secondary"
+                        document={ <DocumentPdf info={ info } /> } 
+                        fileName="cra.pdf">
+                        Generate
+                    </PDFDownloadLink>
+                }
             </form>
         </div>
     )

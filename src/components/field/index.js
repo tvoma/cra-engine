@@ -1,3 +1,5 @@
+'use client'
+
 function Field({ type = 'text', label, ...args }) {
     return (
         <div className="form-field">
