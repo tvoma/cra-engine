@@ -19,13 +19,6 @@ jobs:
           node-version: 18.14.2
           cache: "npm"
 
-      - name: Create SSH key
-        run: |
-          mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/private.key
-          sudo chmod 600 ~/.ssh/private.key
-          ssh-keyscan -H ${{ secrets.REMOTE_HOST }} > ~/.ssh/known_hosts
-
       - name: Install deps
         run: npm ci
 
@@ -41,11 +34,6 @@ jobs:
           ARGS: "-rlgoDzvc -i --delete"
           SOURCE: "/out"
           TARGET: ${{ secrets.REMOTE_TARGET }}
-
-      - name: Clean SSH Key
-        run: |
-          rm -rf ~/.ssh/private.key
-          ssh-keygen -f ~/.ssh/known_hosts -R ${{ secrets.REMOTE_HOST }}
 
 
 
