@@ -32,10 +32,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rlgoDzvc -i --delete"
+          EXCLUDE: '.htaccess'
           SOURCE: "/out"
           TARGET: ${{ secrets.REMOTE_TARGET }}
-
-
-
-
-  
