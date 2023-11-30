@@ -13,6 +13,8 @@ const MONTHS = [
     'Decembre'
 ]
 
+const MONTH_NUMBER = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+
 const DAY = {
     SUNDAY: 0,
     MONDAY: 1,
@@ -33,4 +35,4 @@ const WEEKDAY_FR = {
     [DAY.SUNDAY]: 'Dimanche',
 }
 
-export { MONTHS, DAY, WEEKDAY_FR }
+export { MONTHS, DAY, WEEKDAY_FR, MONTH_NUMBER }

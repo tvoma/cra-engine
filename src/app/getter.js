@@ -1,4 +1,4 @@
-import { MONTHS } from "@/constants/common"
+import { MONTHS, MONTH_NUMBER } from "@/constants/common"
 
 const date = new Date()
 
@@ -22,11 +22,7 @@ const getNbrDays = () => {
     return nbrDays
 }
 
-const getCurrentMonth = () => {
-    const monthKey = date.getMonth()
-
-    return MONTHS[monthKey]
-}
+const getCurrentMonth = () => MONTHS[getMonth()]
 
 const getActivities = () => {
     const nbrDays = getNbrDays()
@@ -35,4 +31,12 @@ const getActivities = () => {
     return Array.from(daysInMonth, (_, key) => ({ day: key + 1, worked: false }))
 }
 
-export { getCurrentMonth, getNbrDays, getDayOfWeek, getActivities }
+const getFilename = fullname => {
+    const year = getYear()
+    const month = MONTH_NUMBER[getMonth()]
+    const name = fullname.toLowerCase().replace(' ', '-')
+
+    return 'CRA-' + year + '-' + month + '-' + name
+}
+
+export { getCurrentMonth, getNbrDays, getDayOfWeek, getActivities, getFilename }

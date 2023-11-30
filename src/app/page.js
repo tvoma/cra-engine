@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { PDFDownloadLink } from "@react-pdf/renderer"
 import DocumentPdf from "@/components/document-pdf"
 import Field from "@/components/field"
-import { getActivities, getCurrentMonth } from "./getter"
+import { getActivities, getCurrentMonth, getFilename } from "./getter"
 import { mapDays } from "./mapper"
 import { setCraInfo } from "./setter"
 
@@ -36,7 +36,7 @@ function Home() {
                     <PDFDownloadLink
                         className="btn-rounded btn btn-secondary"
                         document={ <DocumentPdf info={ info } /> } 
-                        fileName="cra.pdf">
+                        fileName={ getFilename(info.fullname) }>
                         Generate
                     </PDFDownloadLink>
                 }
