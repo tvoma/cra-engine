@@ -14,8 +14,23 @@ const MONTHS = [
 ]
 
 const DAY = {
+    SUNDAY: 0,
+    MONDAY: 1,
+    TUESDAY: 2,
+    WEDNEYSDAY: 3,
+    THURSDAY: 4,
+    FRIDAY: 5,
     SATURDAY: 6,
-    SUNDAY: 0
 }
 
-export { MONTHS, DAY }
+const WEEKDAY_FR = {
+    [DAY.MONDAY]: 'Lundi',
+    [DAY.TUESDAY]: 'Mardi',
+    [DAY.WEDNEYSDAY]: 'Mercredi',
+    [DAY.THURSDAY]: 'Jeudi',
+    [DAY.FRIDAY]: 'Vendredi',
+    [DAY.SATURDAY]: 'Samedi',
+    [DAY.SUNDAY]: 'Dimanche',
+}
+
+export { MONTHS, DAY, WEEKDAY_FR }

@@ -6,21 +6,17 @@ import DocumentPdf from "@/components/document-pdf"
 import Field from "@/components/field"
 import { getActivities, getCurrentMonth } from "./getter"
 import { mapDays } from "./mapper"
+import { setCraInfo } from "./setter"
 
 function Home() {
     const [isReady, setIsReady] = useState(false)
     const [info, setInfo] = useState({
         client: '',
         fullname: '',
-        nbrDays: 18,
+        nbrDays: 0,
         activities: getActivities(),
         currentMonth: getCurrentMonth()
     })
-
-    const setCraInfo = ({ target }) => {
-        const { name, value } = target
-        setInfo(current => ({ ...current, [name]: value }))
-    }
 
     useEffect(() => {
         if (!isReady) setIsReady(true)
@@ -29,13 +25,13 @@ function Home() {
     return (
         <div className='m-12'>
             <h1 className="text-3xl mb-6">Compte rendu d&apos;activité du mois de <span className="font-extrabold">{ info.currentMonth.toLowerCase() }</span></h1>
-            <form onChange={ setCraInfo }>
+            <form onChange={ event => setCraInfo(event, setInfo) }>
                 <div className="mx-auto flex w-full gap-6 mb-6">
                     <Field name='client' label='Nom du client' defaultValue={ info.clientName } placeholder='M. Jourdain, Company Ltd.'/>
                     <Field name='fullname' label='Nom et prénom' defaultValue={ info.fullname } placeholder='Doe John'/>
-                    <Field type='number' name='nbrDays' label='Nombre de jours travaillés' defaultValue={ info.nbrDays } />
+                    <Field type='number' name='nbrDays' label='Nombre de jours travaillés' value={ info.nbrDays } readOnly />
                 </div>
-                <div className="flex justify-between mb-6">{ mapDays(info.activities, setInfo) }</div>
+                <div className="flex overflow-scroll gap-6 mb-6 text-center">{ mapDays(info.activities, setInfo) }</div>
                 { isReady && 
                     <PDFDownloadLink
                         className="btn-rounded btn btn-secondary"

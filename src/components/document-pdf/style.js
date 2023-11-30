@@ -21,7 +21,8 @@ const style = StyleSheet.create({
         width: 841.89 - 60,
         borderRightWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#000'
+        borderColor: '#000',
+        borderRadius: 5
     },
     workday: {
         flex: 1,
